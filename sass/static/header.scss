@@ -1,0 +1,200 @@
+header {
+    padding: 30px 0;
+    position: fixed;
+    width: 100%;
+    transition: 1s;
+    z-index: 2;
+
+    &.fixed {
+        background-color: #fff;
+        transition: 1s;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+
+        nav {
+            .menu {
+                li {
+                    a {
+                        color: black;
+                        font-size: 20px;
+                    }
+                }
+            }
+        }
+
+        .menu-trigger span{
+            background-color: black;
+        }
+    }
+
+    .container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .logo {
+            img {
+                height: 70px;
+                position: relative;
+                z-index: 2;
+
+                @include max992 {
+                    height: 55px;
+                    position: relative;
+                    z-index: 19;
+                }
+            }
+        }
+
+        .menu {
+            display: flex;
+            align-items: center;
+
+            @include max992 {
+                flex-direction: column;
+                width: 100%;
+                height: 100vh;
+                position: absolute;
+                top: 0;
+                background-color: $primary-color;
+                opacity: 0;
+                visibility: hidden;
+                justify-content: center;
+                transition: $eio;
+
+                &.active {
+                    opacity: 1;
+                    visibility: visible;
+                }
+            }
+
+            li {
+                margin-left: 25px;
+                position: relative;
+
+                @include max992 {
+                    margin-left: 0;
+                    margin-bottom: 30px;
+                }
+
+                &.current-menu-item {
+                    &::before {
+                        width: 100%;
+                    }
+                }
+
+                &:hover {
+                    &::before {
+                        width: 100%;
+                        transform-origin: left;
+                        transform: scaleX(1);
+                    }
+                }
+
+                a {
+                    color: #fff;
+                    font-size: 20px;
+
+                    @include max992 {
+                        color: black;
+                        font-weight: 500;
+                    }
+                }
+                .dropdown-content {
+                    position: absolute;
+                    top: 100%;
+                    left: 0;
+                    background-color: #fff;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                    opacity: 0;
+                    visibility: hidden;
+                    /* Başlangıçta görünmez yapın */
+                    transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
+                    /* Animasyon süresi ve gecikme ekleyin */
+                    z-index: 9999;
+                    padding: 10px;
+                    min-width: 200px;
+                    @media (max-width:992px){
+                        left: -60px;
+                    }
+                    li {
+                        padding: 10px;
+                        margin-left: 0;
+                        min-width: 130px;
+                        margin-bottom: 10px;
+
+                        a {
+                            text-decoration: none;
+                            color: #333;
+                            display: block;
+                            font-size: 15px;
+                            @media (max-width:992px){
+                                font-size: 15px !important;
+                            }
+                        }
+                    }
+                    @media screen and (max-width: 992px) {
+                        .dropdown-content, .dropdown-content-01 {
+                          max-height: 250px; /* İçeriğin yüksekliği 200px'yi aştığında kaydırma çubuğu görünür hale gelir */
+                          overflow-y: scroll; /* Y ekseni boyunca kaydırma çubuğu ekleyin */
+                        }
+                    }
+                    
+                }
+                &:hover {
+                    .dropdown-content {
+                        opacity: 1;
+                        /* Gösterirken opaklık ayarını değiştirin */
+                        visibility: visible;
+                        /* Görünür hale getirin */
+                        transition-delay: 0s;
+                        /* Gecikmeyi kaldırın */
+                    }
+                }
+
+                .dropdown-content>li:hover>.dropdown-content-01 {
+                    opacity: 1;
+                    /* Gösterirken opaklık ayarını değiştirin */
+                    visibility: visible;
+                    /* Görünür hale getirin */
+                    transition-delay: 0s;
+                    /* Gecikmeyi kaldırın */
+                }
+
+                .dropdown-content-01 {
+                    position: absolute;
+                    top: 0;
+                    left: 100%;
+                    background-color: #fff;
+                    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+                    opacity: 0;
+                    visibility: hidden;
+                    /* Başlangıçta görünmez yapın */
+                    transition: opacity 0.3s ease-in-out, visibility 0s linear 0.3s;
+                    /* Animasyon süresi ve gecikme ekleyin */
+                    z-index: 9999;
+                    min-width: 230px;
+                    @media (max-width:992px){
+                        min-width: 150px;
+                    }
+                    li {
+                        padding: 10px;
+                        margin-left: 0;
+                        min-width: 130px;
+
+                        a {
+                            text-decoration: none;
+                            color: #333;
+                            display: block;
+                            @media (max-width:992px){
+                                font-size: 13px !important;
+                            }
+                        }
+                    }
+                    
+                }
+            }
+
+
+        }
+    }
+}
